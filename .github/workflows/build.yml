@@ -17,11 +17,18 @@ jobs:
       run: |
         docker build -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
         docker push manorrock/toyger:amd64-latest
+    - name: Build arm32v6 image
+      run: |
+        docker build -f Dockerfile.arm32v6 -t manorrock/toyger:arm32v6-latest .
+        docker push manorrock/toyger:arm32v6-latest
     - name: Push Docker manifest
       run: |
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker manifest create manorrock/toyger:latest \
-          manorrock/toyger:amd64-latest
+          manorrock/toyger:amd64-latest \
+          manorrock/toyger:arm32v6-latest
         docker manifest annotate manorrock/toyger:latest \
           manorrock/toyger:amd64-latest --os linux --arch amd64
+        docker manifest annotate manorrock/toyger:latest \
+          manorrock/toyger:arm32v6-latest --os linux --arch arm
         docker manifest push manorrock/toyger:latest
