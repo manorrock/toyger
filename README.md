@@ -18,11 +18,11 @@ To get started use the following command lines in an __EMPTY__ directory:
 _Note you will need to configure your local Docker daemon to allow interacting
 with the insecure registry at localhost:5000_
 
-Then in another terminal window you first have to setup a user that can log into
-the registry. The command line below creates the user `toyger` with password 
-`r0cks`.
+Then in another terminal window you first have to setup a user that can log into the registry. 
 
-```shell
+The command line below creates the user `toyger` with password `r0cks`.
+
+```
   docker exec -it registry htpasswd -Bb /mnt/passwd toyger r0cks 
 ```
 
