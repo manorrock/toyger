@@ -14,6 +14,8 @@ To get started use the following command lines in an __EMPTY__ directory:
   docker run --rm -it -p 5000:5000 -v $PWD:/mnt manorrock/toyger
 ```
 
+_Note you will need to configure your local Docker daemon to allow interacting with the insecure registry at localhost:5000_
+
 Then in another terminal window you can interact with the registry, e.g:
 
 ```shell
