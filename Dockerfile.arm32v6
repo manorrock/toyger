@@ -11,11 +11,13 @@ RUN /root/go/bin/registry --version
 
 # Build a minimal distribution container
 FROM manorrock/debian:arm32v6
+RUN ["cross-build-start"]
 RUN apt-get update && \
     apt-get install -y ca-certificates librados2 apache2-utils && \
     rm -rf /var/lib/apt/lists/*
 COPY --from=builder /root/go/bin/registry /bin/registry
 COPY --from=builder /root/go/src/github.com/docker/distribution/cmd/registry/config-example.yml /etc/docker/registry/config.yml
+RUN ["cross-build-end"]
 VOLUME ["/var/lib/registry"]
 EXPOSE 5000
 ENTRYPOINT ["/bin/registry"]
