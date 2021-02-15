@@ -1,4 +1,5 @@
 FROM manorrock/go:arm32v6 as builder
+RUN ["cross-build-start"]
 RUN apt-get update
 RUN apt-get install -y make git build-essential
 RUN mkdir -p /root/go
@@ -8,6 +9,7 @@ RUN cd src/github.com/docker/distribution && git checkout v2.7.1
 RUN go get github.com/docker/distribution/cmd/registry
 RUN mkdir -p /var/lib/registry
 RUN /root/go/bin/registry --version
+RUN ["cross-build-start"]
 
 # Build a minimal distribution container
 FROM manorrock/debian:arm32v6
