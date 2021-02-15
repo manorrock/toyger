@@ -24,6 +24,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 COPY --from=builder /root/go/bin/registry /bin/registry
 COPY config /mnt
+VOLUME ["/mnt"]
 EXPOSE 5000
 ENTRYPOINT ["/bin/registry"]
 CMD ["serve", "/mnt/config.yml"]

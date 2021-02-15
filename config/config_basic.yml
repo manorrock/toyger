@@ -14,7 +14,7 @@ http:
 auth:
   htpasswd:
     realm: basic-realm
-    path: /mnt/htpasswd
+    path: /mnt/passwd
 health:
   storagedriver:
     enabled: true
