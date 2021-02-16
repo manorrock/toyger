@@ -13,6 +13,7 @@
     <packaging>war</packaging>
     <name>Manorrock Toyger - Admin</name>
     <build>
+        <finalName>admin</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
