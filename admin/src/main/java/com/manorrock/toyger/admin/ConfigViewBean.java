@@ -25,26 +25,42 @@
  */
 package com.manorrock.toyger.admin;
 
-import javax.inject.Named;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * The CDI bean for /config/view page.
- * 
+ *
  * @author Manfred Riem (mriem@manorrock.com)
  */
 @Named(value = "configViewBean")
 @RequestScoped
 public class ConfigViewBean {
-    
+
+    /**
+     * Stores the application bean.
+     */
+    @Inject
+    private ApplicationBean application;
+
     /**
      * Stores the config.
      */
     private String config;
     
     /**
+     * Initialize.
+     */
+    @PostConstruct
+    public void initialize() {
+        config = application.getConfigYml();
+    }
+
+    /**
      * Get the config.
-     * 
+     *
      * @return the config.
      */
     public String getConfig() {
@@ -53,7 +69,7 @@ public class ConfigViewBean {
 
     /**
      * Set the config.
-     * 
+     *
      * @param config the config.
      */
     public void setConfig(String config) {

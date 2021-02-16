@@ -26,6 +26,13 @@
 package com.manorrock.toyger.admin;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import static java.util.logging.Level.FINE;
+import static java.util.logging.Level.INFO;
+import static java.util.logging.Level.WARNING;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 
@@ -36,6 +43,11 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class ApplicationBean {
+
+    /**
+     * Stores the logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(ApplicationBean.class.getPackageName());
 
     /**
      * Stores the root directory.
@@ -59,10 +71,29 @@ public class ApplicationBean {
                     System.getProperty("user.home") + File.separator
                     + ".manorrock" + File.separator + "toyger");
         }
+        
+        LOGGER.log(INFO, "Using root directory: {0}", rootDirectory);
+        
         File directory = new File(rootDirectory);
         if (!directory.exists()) {
+            LOGGER.log(FINE, "Creating root directory: {0}", rootDirectory);
             directory.mkdirs();
         }
+    }
+    
+    /**
+     * Get the config.yml content.
+     * 
+     * @return the config.yml content.
+     */
+    public String getConfigYml() {
+        String config = "";
+        try {
+            config = Files.readString(Path.of(rootDirectory, "config.yml"));
+        } catch (IOException ioe) {
+            LOGGER.log(WARNING, "Unable to read config.yml", ioe);
+        }
+        return config;
     }
 
     /**

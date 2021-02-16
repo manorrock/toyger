@@ -25,18 +25,26 @@
  */
 package com.manorrock.toyger.admin;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 /**
  * The CDI bean for /config/edit page.
- * 
+ *
  * @author Manfred Riem (mriem@manorrock.com)
  */
 @Named(value = "configEditBean")
 @RequestScoped
 public class ConfigEditBean {
     
+    /**
+     * Stores the application bean.
+     */
+    @Inject
+    private ApplicationBean application;
+
     /**
      * Stores the config.
      */
@@ -52,8 +60,16 @@ public class ConfigEditBean {
     }
     
     /**
+     * Initialize.
+     */
+    @PostConstruct
+    public void initialize() {
+        config = application.getConfigYml();
+    }
+
+    /**
      * Save the config.
-     * 
+     *
      * @return to the same page.
      */
     public String save() {
@@ -62,7 +78,7 @@ public class ConfigEditBean {
 
     /**
      * Set the config.
-     * 
+     *
      * @param config the config.
      */
     public void setConfig(String config) {
