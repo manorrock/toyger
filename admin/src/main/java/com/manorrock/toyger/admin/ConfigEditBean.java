@@ -25,9 +25,16 @@
  */
 package com.manorrock.toyger.admin;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
+import static javax.faces.application.FacesMessage.SEVERITY_INFO;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -38,7 +45,7 @@ import javax.inject.Inject;
 @Named(value = "configEditBean")
 @RequestScoped
 public class ConfigEditBean {
-    
+
     /**
      * Stores the application bean.
      */
@@ -46,19 +53,25 @@ public class ConfigEditBean {
     private ApplicationBean application;
 
     /**
+     * Stores the Faces context.
+     */
+    @Inject
+    private FacesContext context;
+
+    /**
      * Stores the config.
      */
     private String config;
-    
+
     /**
      * Get the config.
-     * 
+     *
      * @return the config.
      */
     public String getConfig() {
         return config;
     }
-    
+
     /**
      * Initialize.
      */
@@ -73,6 +86,19 @@ public class ConfigEditBean {
      * @return to the same page.
      */
     public String save() {
+        try {
+            Files.write(Paths.get(application.getRootDirectory(), "config.yml"),
+                    config.getBytes());
+
+            context.addMessage(null, new FacesMessage(SEVERITY_INFO,
+                    "Sucessfully saved config.yml", 
+                    "Sucessfully saved config.yml"));
+            
+        } catch (IOException ioe) {
+            context.addMessage(null, new FacesMessage(SEVERITY_ERROR,
+                    "An error occured while saving config.yml",
+                    "An error occured while saving config.yml"));
+        }
         return "";
     }
 

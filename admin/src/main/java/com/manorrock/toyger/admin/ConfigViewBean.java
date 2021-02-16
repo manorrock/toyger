@@ -26,9 +26,9 @@
 package com.manorrock.toyger.admin;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  * The CDI bean for /config/view page.
@@ -49,7 +49,7 @@ public class ConfigViewBean {
      * Stores the config.
      */
     private String config;
-    
+
     /**
      * Initialize.
      */
