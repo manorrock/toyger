@@ -16,6 +16,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
     - name: Build amd64 image
       run: |
+        cd registry
         TAG=${GITHUB_REF}
         INDEX=${TAG%v*}
         VERSION=${TAG:${#INDEX}+1}
@@ -23,6 +24,7 @@ jobs:
         docker push manorrock/toyger:amd64-$VERSION
     - name: Push Docker manifest
       run: |
+        cd registry
         TAG=${GITHUB_REF}
         INDEX=${TAG%v*}
         VERSION=${TAG:${#INDEX}+1}

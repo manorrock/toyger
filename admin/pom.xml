@@ -8,7 +8,7 @@
         <version>21.3.0-SNAPSHOT</version>
     </parent>
     <groupId>com.manorrock.toyger</groupId>
-    <artifactId>admin</artifactId>
+    <artifactId>toyger-admin</artifactId>
     <version>21.3.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Manorrock Toyger - Admin</name>
