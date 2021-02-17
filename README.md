@@ -6,41 +6,33 @@ This project delivers you with a Docker registry.
 
 _This configuration is the default configuration_
 
-To get started use the following command lines in an __EMPTY__ directory:
+To get started use the following command line:
 
 ```shell
-  curl -o config.yml https://raw.githubusercontent.com/manorrock/toyger/master/config/config_basic.yml 
-  touch passwd
-  mkdir data
-  docker run --name registry --rm -it -p 5000:5000 -v $PWD:/mnt manorrock/toyger
+  docker run --name registry --rm -it -p 5000:5000 manorrock/toyger
 ```
 
-_Note you will need to configure your local Docker daemon to allow interacting
-with the insecure registry at localhost:5000_
+This will start Manorrock Toyger and expose it on port 5000. Note that by
+default no user has access to the registry so you will need to add a user so you
+can access the registry.
 
-Then in another terminal window you first have to setup a user that can log into the registry. 
-
-The command line below creates the user `toyger` with password `r0cks`.
+Assuming you have the registry up and running using the command line from above
+you can add a user to the registry by executing the command line below. Make 
+sure to replace <username> and <password> with your own values.
 
 ```
-  docker exec -it registry htpasswd -Bb /mnt/passwd toyger r0cks 
+  docker exec -it registry htpasswd -Bb /mnt/passwd <username> <password>
 ```
 
-Now login into the registry using the user you just created by issuing the 
-following command line:
+The next step is to log into the registry so you can pull or push images. As you
+exposed it on port 5000 the following command line will log you in:
 
 ```shell
   docker login localhost:5000
 ```
 
-And then you can interact with the registry:
-
-```shell
-  docker pull hello-world
-  docker tag hello-world localhost:5000/hello-world
-  docker push localhost:5000/hello-world
-  docker run localhost:5000/hello-world
-```
+_Note as this way of running the registry is considered an insecure registry you
+will need to add the registry URI to your Docker daemon as an insecure registry_
 
 ## Registry protected by Token authentication / authorization
 
