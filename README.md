@@ -48,3 +48,13 @@ that contains the root directory of the registry container.
 ```shell
   docker run --name admin --rm -it -p 8080:8080 -v $PWD:/mnt manorrock/toyger-admin
 ```
+
+## Sample configuration files
+
+Depending on your use case you might want to be able to use your own 
+configuration and hence you will need to supply your own configuration files.
+
+The sample configuration files are in the `config` directory.
+
+1. config_basic.yml - the sample configuration for BASIC authentication
+1. passwd - an empty placeholder password file for the BASIS configuration
