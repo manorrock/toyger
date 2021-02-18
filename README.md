@@ -18,10 +18,10 @@ can access the registry.
 
 Assuming you have the registry up and running using the command line from above
 you can add a user to the registry by executing the command line below. Make 
-sure to replace <username> and <password> with your own values.
+sure to replace &lt;username> and &lt;password> with your own values.
 
 ```
-  docker exec -it registry htpasswd -Bb /mnt/passwd <username> <password>
+  docker exec -it registry htpasswd -Bb /mnt/passwd &lt;username> &lt;password>
 ```
 
 The next step is to log into the registry so you can pull or push images. As you
@@ -37,3 +37,14 @@ will need to add the registry URI to your Docker daemon as an insecure registry_
 ## Registry protected by Token authentication / authorization
 
 This configuration is under development.
+
+## Admin to manage authentication / authorization
+
+_This is the admin to manage Manorrock Toyger_
+
+To get started use the following command line replacing $PWD with the directory
+that contains the root directory of the registry container.
+
+```shell
+  docker run --name admin --rm -it -p 8080:8080 -v $PWD:/mnt manorrock/toyger-admin
+```
