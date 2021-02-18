@@ -21,7 +21,7 @@ you can add a user to the registry by executing the command line below. Make
 sure to replace &lt;username> and &lt;password> with your own values.
 
 ```
-  docker exec -it registry htpasswd -Bb /mnt/passwd &lt;username> &lt;password>
+  docker exec -it registry htpasswd -Bb /mnt/passwd <username> <password>
 ```
 
 The next step is to log into the registry so you can pull or push images. As you
@@ -40,7 +40,7 @@ This configuration is under development.
 
 ## Admin to manage authentication / authorization
 
-_This is the admin to manage Manorrock Toyger_
+_This is the admin web application to manage Manorrock Toyger_
 
 To get started use the following command line replacing $PWD with the directory
 that contains the root directory of the registry container.
