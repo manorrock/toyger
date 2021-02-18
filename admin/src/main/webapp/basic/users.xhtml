@@ -3,14 +3,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <ui:repeat value="#{basicUsersBean.users}" var="user">
-            <h:outputText value="#{user}"/>
-        </ui:repeat>
-    </h:body>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+        <ui:composition template="../WEB-INF/templates/template1.xhtml">
+            <ui:define name="title">Manorrock Toyger - Users</ui:define>
+            <ui:define name="content">
+                <h2>Users</h2>
+                <ui:repeat value="#{basicUsersBean.users}" var="user">
+                    <h:outputText value="#{user}"/>
+                </ui:repeat>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>
