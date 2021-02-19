@@ -49,6 +49,8 @@ that contains the root directory of the registry container.
   docker run --name admin --rm -it -p 8080:8080 -v $PWD:/mnt manorrock/toyger-admin
 ```
 
+Then browse to `http://localhost:8080` to manage your Manorrock Toyger registry.
+
 ## Sample configuration files
 
 Depending on your use case you might want to be able to use your own 
