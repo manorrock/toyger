@@ -31,6 +31,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -77,7 +78,10 @@ public class BasicUsersBean {
     public void initialize() {
         try {
             String rootDirectory = application.getRootDirectory();
-            users = Files.readAllLines(Path.of(rootDirectory, "passwd"));
+            users = Files.readAllLines(Path.of(rootDirectory, "passwd"))
+                    .stream()
+                    .map(s -> s.substring(0, s.indexOf(":")))
+                    .collect(Collectors.toList());
         } catch(IOException ioe) {
             LOGGER.warning("Unable to load BASIC passwd file");
             users = new ArrayList<>();
