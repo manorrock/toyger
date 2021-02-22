@@ -10,6 +10,7 @@
             <ui:define name="title">Manorrock Toyger - Users</ui:define>
             <ui:define name="content">
                 <h2>Users</h2>
+                <h:outputLink value="user/add.xhtml">Add</h:outputLink>
                 <ui:repeat value="#{basicUsersBean.users}" var="user">
                     <h:outputText value="#{user}"/>
                 </ui:repeat>
