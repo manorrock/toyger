@@ -1,0 +1,20 @@
+version: '3'
+volumes:
+  toyger_data:
+services:
+  registry:
+    image: manorrock/toyger
+    ports:
+      - 5000:5000
+    environment:
+      - REGISTRY_HTTP_SECRET=mysupersecret
+    volumes:
+      - toyger_data:/mnt:rw
+  admin:
+    image: manorrock/toyger-admin
+    ports:
+      - 8080:8080
+    environment:
+      - ROOT_DIRECTORY=/mnt
+    volumes:
+      - toyger_data:/mnt:rw
