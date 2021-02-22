@@ -72,6 +72,37 @@ public class BasicUserEditBean {
     private String username;
 
     /**
+     * Delete the user.
+     *
+     * @return to basic entry page.
+     */
+    public String delete() {
+        String result = "/basic/index";
+        try {
+            Process process = new ProcessBuilder()
+                    .command("htpasswd",
+                            "-D",
+                            new File(application.getRootDirectory(), "passwd")
+                                    .getAbsolutePath(),
+                            username)
+                    .start();
+
+            int exit = process.waitFor();
+
+            if (exit != 0) {
+                throw new IOException();
+            }
+
+        } catch (IOException | InterruptedException e) {
+            context.addMessage(null, new FacesMessage(SEVERITY_ERROR,
+                    "An error occured while deleting the user",
+                    "An error occured while deleting the user"));
+            result = "";
+        }
+        return result;
+    }
+
+    /**
      * Get the password.
      *
      * @return the password.

@@ -56,7 +56,8 @@ Then browse to `http://localhost:8080` to manage your Manorrock Toyger registry.
 Depending on your use case you might want to be able to use your own 
 configuration and hence you will need to supply your own configuration files.
 
-The sample configuration files are in the `config` directory.
+The sample configuration files are in the `samples` directory.
 
 1. config_basic.yml - the sample configuration for BASIC authentication
 1. passwd - an empty placeholder password file for the BASIS configuration
+1. deployment.yml - a sample Kubernetes deployment
