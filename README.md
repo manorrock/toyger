@@ -1,4 +1,4 @@
-# Manorrock Toyger - a Docker registry
+# Manorrock Toyger
 
 This project delivers you with a Docker registry.
 
