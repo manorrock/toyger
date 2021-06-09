@@ -4,8 +4,6 @@ This project delivers you with a Docker registry.
 
 ## Registry protected by BASIC authentication / authorization
 
-_This configuration is the default configuration_
-
 To get started use the following command line:
 
 ```shell
