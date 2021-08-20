@@ -1,14 +1,4 @@
-FROM debian
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y curl dnsutils gzip software-properties-common tar && \
-    rm -rf /var/lib/apt/lists/* && \
-    cd /usr/local && \
-    curl --insecure -L -O https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.10%2B9/OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz && \
-    tar xfvz OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz && \
-    mv jdk-11.0.10+9 jdk && \
-    rm OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz
-ENV PATH=$PATH:/usr/local/jdk/bin
+FROM eclipse-temurin:11
 WORKDIR /mnt
 RUN cd /usr/local && \
     curl --insecure -L -O https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.43/bin/apache-tomcat-9.0.43.tar.gz && \
