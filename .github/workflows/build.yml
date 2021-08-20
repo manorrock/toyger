@@ -53,7 +53,6 @@ jobs:
         cd admin
         docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
         docker build -f Dockerfile.arm32v6 -t manorrock/toyger-admin:arm32v6-latest .
-        docker push manorrock/toyger-admin:arm32v6-latest
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker manifest create manorrock/toyger-admin:latest \
           manorrock/toyger-admin:amd64-latest \
