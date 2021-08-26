@@ -1,4 +1,4 @@
-FROM balenalib/raspberry-pi-debian
+FROM balenalib/raspberry-pi
 RUN apt-get update --allow-insecure-repositories && \
     apt-get upgrade -y --allow-unauthenticated && \
     apt-get install -y --allow-unauthenticated curl dnsutils gzip libfontconfig1 libfreetype6 software-properties-common tar && \
