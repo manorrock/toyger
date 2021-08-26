@@ -51,9 +51,9 @@ jobs:
     - name: Build Docker images
       run: |
         cd admin
-        docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
-        docker build -f Dockerfile.arm32v6 -t manorrock/toyger-admin:arm32v6-latest .
         export DOCKER_CLI_EXPERIMENTAL=enabled
+        docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
+        docker buildx build --platform linux/arm/v6 -t manorrock/toyger-admin:arm32v6-latest -f Dockerfile.arm32v6 .
         docker manifest create manorrock/toyger-admin:latest \
           manorrock/toyger-admin:amd64-latest \
           manorrock/toyger-admin:arm32v6-latest

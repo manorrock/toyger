@@ -50,23 +50,20 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-    - name: Build amd64 image
-      run: |
-        cd admin
-        TAG=${GITHUB_REF}
-        INDEX=${TAG%v*}
-        VERSION=${TAG:${#INDEX}+1}
-        docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-$VERSION .
-        docker push manorrock/toyger-admin:amd64-$VERSION
-    - name: Push Docker manifest
+    - name: Build Docker images
       run: |
         cd admin
         TAG=${GITHUB_REF}
         INDEX=${TAG%v*}
         VERSION=${TAG:${#INDEX}+1}
         export DOCKER_CLI_EXPERIMENTAL=enabled
+        docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64--$VERSION .
+        docker buildx build --platform linux/arm/v6 -t manorrock/toyger-admin:arm32v6--$VERSION -f Dockerfile.arm32v6 .
         docker manifest create manorrock/toyger-admin:$VERSION \
-          manorrock/toyger-admin:amd64-$VERSION
+          manorrock/toyger-admin:amd64-$VERSION && \
+          manorrock/toyger-admin:arm32v6-$VERSION
         docker manifest annotate manorrock/toyger-admin:$VERSION \
           manorrock/toyger-admin:amd64-$VERSION --os linux --arch amd64
+        docker manifest annotate manorrock/toyger-admin:$VERSION \
+          manorrock/toyger-admin:arm32v6-$VERSION --os linux --arch arm
         docker manifest push manorrock/toyger-admin:$VERSION
