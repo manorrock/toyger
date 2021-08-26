@@ -19,16 +19,12 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-    - uses: docker/setup-buildx-action@v1
-      id: buildx
-      with:
-        install: true
     - name: Build Docker images
       run: |
         cd registry
+        export DOCKER_CLI_EXPERIMENTAL=enabled
         docker build -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
         docker build -f Dockerfile.arm32v6 -t manorrock/toyger:arm32v6-latest .
-        export DOCKER_CLI_EXPERIMENTAL=enabled
         docker manifest create manorrock/toyger:latest \
           manorrock/toyger:amd64-latest \
           manorrock/toyger:arm32v6-latest
@@ -52,16 +48,12 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-    - uses: docker/setup-buildx-action@v1
-      id: buildx
-      with:
-        install: true
     - name: Build Docker images
       run: |
         cd admin
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
-        docker buildx build --platform linux/arm/v6 -t manorrock/toyger-admin:arm32v6-latest -f Dockerfile.arm32v6 .
+        docker build -f Dockerfile.arm32v6 -t manorrock/toyger-admin:arm32v6-latest .
         docker manifest create manorrock/toyger-admin:latest \
           manorrock/toyger-admin:amd64-latest \
           manorrock/toyger-admin:arm32v6-latest

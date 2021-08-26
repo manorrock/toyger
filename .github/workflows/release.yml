@@ -65,8 +65,8 @@ jobs:
         INDEX=${TAG%v*}
         VERSION=${TAG:${#INDEX}+1}
         export DOCKER_CLI_EXPERIMENTAL=enabled
-        docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64--$VERSION .
-        docker buildx build --platform linux/arm/v6 -t manorrock/toyger-admin:arm32v6--$VERSION -f Dockerfile.arm32v6 .
+        docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-$VERSION .
+        docker build -f Dockerfile.arm32v6 -t manorrock/toyger-admin:arm32v6-$VERSION  .
         docker manifest create manorrock/toyger-admin:$VERSION \
           manorrock/toyger-admin:amd64-$VERSION && \
           manorrock/toyger-admin:arm32v6-$VERSION
