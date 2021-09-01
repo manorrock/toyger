@@ -1,6 +1,6 @@
 FROM balenalib/raspberry-pi as builder
 RUN ["cross-build-start"]
-ENV GO_VERSION=1.15.8
+ENV GO_VERSION=1.17
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y build-essential make git wget
