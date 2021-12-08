@@ -58,12 +58,8 @@ jobs:
         VERSION=${TAG:${#INDEX}+1}
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-$VERSION .
-        docker build -f Dockerfile.arm32v6 -t manorrock/toyger-admin:arm32v6-$VERSION  .
         docker manifest create manorrock/toyger-admin:$VERSION \
-          manorrock/toyger-admin:amd64-$VERSION && \
-          manorrock/toyger-admin:arm32v6-$VERSION
+          manorrock/toyger-admin:amd64-$VERSION
         docker manifest annotate manorrock/toyger-admin:$VERSION \
           manorrock/toyger-admin:amd64-$VERSION --os linux --arch amd64
-        docker manifest annotate manorrock/toyger-admin:$VERSION \
-          manorrock/toyger-admin:arm32v6-$VERSION --os linux --arch arm
         docker manifest push manorrock/toyger-admin:$VERSION
