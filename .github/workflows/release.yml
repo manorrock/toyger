@@ -50,7 +50,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-    - name: Build Docker images
+    - name: Build and push Docker image
       run: |
         cd admin
         TAG=${GITHUB_REF}
@@ -58,6 +58,7 @@ jobs:
         VERSION=${TAG:${#INDEX}+1}
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-$VERSION .
+        docker push manorrock/toyger-admin:amd64-$VERSION
         docker manifest create manorrock/toyger-admin:$VERSION \
           manorrock/toyger-admin:amd64-$VERSION
         docker manifest annotate manorrock/toyger-admin:$VERSION \
