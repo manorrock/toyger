@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Java 11
+    - name: Set up Java
       uses: actions/setup-java@v1
       with:
-        java-version: 11
+        java-version: 17
     - name: Build with Maven
       run: mvn -B package
     - name: Login to Docker Hub
@@ -24,23 +24,19 @@ jobs:
         cd registry
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker build -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
-        docker build -f Dockerfile.arm32v6 -t manorrock/toyger:arm32v6-latest .
         docker manifest create manorrock/toyger:latest \
-          manorrock/toyger:amd64-latest \
-          manorrock/toyger:arm32v6-latest
+          manorrock/toyger:amd64-latest
         docker manifest annotate manorrock/toyger:latest \
           manorrock/toyger:amd64-latest --os linux --arch amd64
-        docker manifest annotate manorrock/toyger:latest \
-          manorrock/toyger:arm32v6-latest --os linux --arch arm
         docker manifest push manorrock/toyger:latest
   admin:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Java 11
+    - name: Set up Java
       uses: actions/setup-java@v1
       with:
-        java-version: 11
+        java-version: 17
     - name: Build with Maven
       run: mvn -B package
     - name: Login to Docker Hub
@@ -53,12 +49,8 @@ jobs:
         cd admin
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
-        docker build -f Dockerfile.arm32v6 -t manorrock/toyger-admin:arm32v6-latest .
         docker manifest create manorrock/toyger-admin:latest \
-          manorrock/toyger-admin:amd64-latest \
-          manorrock/toyger-admin:arm32v6-latest
+          manorrock/toyger-admin:amd64-latest
         docker manifest annotate manorrock/toyger-admin:latest \
           manorrock/toyger-admin:amd64-latest --os linux --arch amd64
-        docker manifest annotate manorrock/toyger-admin:latest \
-          manorrock/toyger-admin:arm32v6-latest --os linux --arch arm
         docker manifest push manorrock/toyger-admin:latest

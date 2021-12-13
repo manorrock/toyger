@@ -25,9 +25,9 @@
  */
 package com.manorrock.toyger.admin;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.annotation.FacesConfig;
-import static javax.faces.annotation.FacesConfig.Version.JSF_2_3;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.annotation.FacesConfig;
+import static jakarta.faces.annotation.FacesConfig.Version.JSF_2_3;
 
 /**
  * CDI bean to enable Faces 2.3+.
