@@ -1,13 +1,13 @@
 FROM debian as builder
 ENV GO_VERSION=1.15.15
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y make git wget
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y make git wget && \
+    rm -rf /var/lib/apt/lists/*
 RUN wget https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz
 RUN tar xvf go$GO_VERSION.linux-amd64.tar.gz
 RUN mv go /usr/local
 RUN rm go$GO_VERSION.linux-amd64.tar.gz
-RUN rm -rf /var/lib/apt/lists/*
 ENV PATH=$PATH:/usr/local/go/bin
 RUN mkdir -p /root/go
 WORKDIR /root/go
