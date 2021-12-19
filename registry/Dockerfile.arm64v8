@@ -9,6 +9,7 @@ RUN tar xvf go$GO_VERSION.linux-arm64.tar.gz
 RUN mv go /usr/local
 RUN rm go$GO_VERSION.linux-arm64.tar.gz
 ENV PATH=$PATH:/usr/local/go/bin
+ENV GOARCH=arm64
 RUN mkdir -p /root/go
 WORKDIR /root/go
 RUN go get github.com/docker/distribution/cmd/registry
