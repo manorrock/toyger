@@ -23,7 +23,7 @@ jobs:
       run: |
         cd registry
         export DOCKER_CLI_EXPERIMENTAL=enabled
-        docker build -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
+        docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
         docker push manorrock/toyger:amd64-latest
         docker build --platform linux/arm64/v8 -f Dockerfile.arm64v8 -t manorrock/toyger:arm64v8-latest .
         docker push manorrock/toyger:arm64v8-latest
@@ -54,7 +54,7 @@ jobs:
       run: |
         cd admin
         export DOCKER_CLI_EXPERIMENTAL=enabled
-        docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
+        docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
         docker push manorrock/toyger-admin:amd64-latest
         docker build --platform linux/arm64/v8 -f Dockerfile.arm64v8 -t manorrock/toyger-admin:arm64v8-latest .
         docker push manorrock/toyger-admin:arm64v8-latest

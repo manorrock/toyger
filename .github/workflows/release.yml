@@ -20,7 +20,8 @@ jobs:
         TAG=${GITHUB_REF}
         INDEX=${TAG%v*}
         VERSION=${TAG:${#INDEX}+1}
-        docker build -f Dockerfile.amd64 -t manorrock/toyger:amd64-$VERSION .
+        export DOCKER_CLI_EXPERIMENTAL=enabled
+        docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-$VERSION .
         docker push manorrock/toyger:amd64-$VERSION
     - name: Push Docker manifest
       run: |
@@ -57,7 +58,7 @@ jobs:
         INDEX=${TAG%v*}
         VERSION=${TAG:${#INDEX}+1}
         export DOCKER_CLI_EXPERIMENTAL=enabled
-        docker build -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-$VERSION .
+        docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-$VERSION .
         docker push manorrock/toyger-admin:amd64-$VERSION
         docker manifest create manorrock/toyger-admin:$VERSION \
           manorrock/toyger-admin:amd64-$VERSION
