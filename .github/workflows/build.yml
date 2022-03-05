@@ -29,7 +29,7 @@ jobs:
         docker push manorrock/toyger:arm64v8-latest
         docker manifest create manorrock/toyger:latest \
           manorrock/toyger:amd64-latest \
-          manorrock/toyger:arm64v8-latest
+          manorrock/toyger:arm64v8-latest --amend
         docker manifest annotate manorrock/toyger:latest \
           manorrock/toyger:amd64-latest --os linux --arch amd64
         docker manifest annotate manorrock/toyger:latest \
@@ -60,7 +60,7 @@ jobs:
         docker push manorrock/toyger-admin:arm64v8-latest
         docker manifest create manorrock/toyger-admin:latest \
           manorrock/toyger-admin:amd64-latest \
-          manorrock/toyger-admin:arm64v8-latest
+          manorrock/toyger-admin:arm64v8-latest --amend
         docker manifest annotate manorrock/toyger-admin:latest \
           manorrock/toyger-admin:amd64-latest --os linux --arch amd64
         docker manifest annotate manorrock/toyger-admin:latest \
