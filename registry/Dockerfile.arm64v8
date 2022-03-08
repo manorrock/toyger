@@ -1,4 +1,4 @@
-FROM debian as builder
+FROM arm64v8/debian as builder
 ENV GO_VERSION=1.15.15
 RUN apt-get update && \
     apt-get upgrade -y && \
@@ -18,7 +18,7 @@ RUN go get github.com/docker/distribution/cmd/registry
 RUN mkdir -p /var/lib/registry
 RUN /root/go/bin/registry --version
 
-FROM debian
+FROM arm64v8/debian
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y ca-certificates librados2 apache2-utils && \
