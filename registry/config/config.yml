@@ -6,7 +6,7 @@ storage:
   cache:
     blobdescriptor: inmemory
   filesystem:
-    rootdirectory: /mnt/data
+    rootdirectory: /mnt/registry/data
 http:
   addr: :5000
   headers:
@@ -14,7 +14,7 @@ http:
 auth:
   htpasswd:
     realm: basic-realm
-    path: /mnt/passwd
+    path: /mnt/registry/passwd
 health:
   storagedriver:
     enabled: true
