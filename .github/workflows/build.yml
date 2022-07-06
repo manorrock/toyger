@@ -2,7 +2,12 @@ name: build
 on: 
   push:
     branches:
-      - 'current'
+      - '*'
+    tags-ignore:
+      - 'v*'
+  pull_request:
+    branches:
+      - '*'  
 jobs:
   registry:
     runs-on: ubuntu-latest
@@ -24,9 +29,7 @@ jobs:
         cd registry
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
-        docker push manorrock/toyger:amd64-latest
         docker build --platform linux/arm64/v8 -f Dockerfile.arm64v8 -t manorrock/toyger:arm64v8-latest .
-        docker push manorrock/toyger:arm64v8-latest
         docker manifest create manorrock/toyger:latest \
           manorrock/toyger:amd64-latest \
           manorrock/toyger:arm64v8-latest --amend
@@ -34,7 +37,6 @@ jobs:
           manorrock/toyger:amd64-latest --os linux --arch amd64
         docker manifest annotate manorrock/toyger:latest \
           manorrock/toyger:arm64v8-latest --os linux --arch arm64 --variant v8
-        docker manifest push manorrock/toyger:latest
   admin:
     runs-on: ubuntu-latest
     steps:
@@ -55,9 +57,7 @@ jobs:
         cd admin
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
-        docker push manorrock/toyger-admin:amd64-latest
         docker build --platform linux/arm64/v8 -f Dockerfile.arm64v8 -t manorrock/toyger-admin:arm64v8-latest .
-        docker push manorrock/toyger-admin:arm64v8-latest
         docker manifest create manorrock/toyger-admin:latest \
           manorrock/toyger-admin:amd64-latest \
           manorrock/toyger-admin:arm64v8-latest --amend
@@ -65,7 +65,6 @@ jobs:
           manorrock/toyger-admin:amd64-latest --os linux --arch amd64
         docker manifest annotate manorrock/toyger-admin:latest \
           manorrock/toyger-admin:arm64v8-latest --os linux --arch arm64 --variant v8
-        docker manifest push manorrock/toyger-admin:latest
   both:
     runs-on: ubuntu-latest
     steps:
