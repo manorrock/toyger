@@ -27,9 +27,8 @@ jobs:
     - name: Build Docker images
       run: |
         cd registry
-        export DOCKER_CLI_EXPERIMENTAL=enabled
-        docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
-        docker build --platform linux/arm64/v8 -f Dockerfile.arm64v8 -t manorrock/toyger:arm64v8-latest .
+        docker buildx build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
+        docker buildx build --platform linux/arm64/v8 -f Dockerfile.arm64v8 -t manorrock/toyger:arm64v8-latest .
         docker manifest create manorrock/toyger:latest \
           manorrock/toyger:amd64-latest \
           manorrock/toyger:arm64v8-latest --amend
@@ -55,9 +54,8 @@ jobs:
     - name: Build Docker images
       run: |
         cd admin
-        export DOCKER_CLI_EXPERIMENTAL=enabled
-        docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
-        docker build --platform linux/arm64/v8 -f Dockerfile.arm64v8 -t manorrock/toyger-admin:arm64v8-latest .
+        docker buildx build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
+        docker buildx build --platform linux/arm64/v8 -f Dockerfile.arm64v8 -t manorrock/toyger-admin:arm64v8-latest .
         docker manifest create manorrock/toyger-admin:latest \
           manorrock/toyger-admin:amd64-latest \
           manorrock/toyger-admin:arm64v8-latest --amend
@@ -82,8 +80,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
     - name: Build Docker images
       run: |
-        export DOCKER_CLI_EXPERIMENTAL=enabled
-        docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
+        docker buildx build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
         docker manifest create manorrock/toyger:latest \
           manorrock/toyger:amd64-latest 
         docker manifest annotate manorrock/toyger:latest \
