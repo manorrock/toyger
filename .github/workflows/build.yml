@@ -2,9 +2,14 @@ name: build
 on: 
   push:
     branches:
-      - 'current'
+      - '*'
+    tags-ignore:
+      - 'v*'
+  pull_request:
+    branches:
+      - '*'  
 jobs:
-  registry:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -21,48 +26,8 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
     - name: Build Docker images
       run: |
-        cd registry
-        export DOCKER_CLI_EXPERIMENTAL=enabled
-        docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
-        docker push manorrock/toyger:amd64-latest
-        docker build --platform linux/arm64/v8 -f Dockerfile.arm64v8 -t manorrock/toyger:arm64v8-latest .
-        docker push manorrock/toyger:arm64v8-latest
+        docker buildx build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
         docker manifest create manorrock/toyger:latest \
-          manorrock/toyger:amd64-latest \
-          manorrock/toyger:arm64v8-latest --amend
+          manorrock/toyger:amd64-latest 
         docker manifest annotate manorrock/toyger:latest \
           manorrock/toyger:amd64-latest --os linux --arch amd64
-        docker manifest annotate manorrock/toyger:latest \
-          manorrock/toyger:arm64v8-latest --os linux --arch arm64 --variant v8
-        docker manifest push manorrock/toyger:latest
-  admin:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Set up Java
-      uses: actions/setup-java@v1
-      with:
-        java-version: 17
-    - name: Build with Maven
-      run: mvn -B package
-    - name: Login to Docker Hub
-      uses: azure/docker-login@v1
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-    - name: Build Docker images
-      run: |
-        cd admin
-        export DOCKER_CLI_EXPERIMENTAL=enabled
-        docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-latest .
-        docker push manorrock/toyger-admin:amd64-latest
-        docker build --platform linux/arm64/v8 -f Dockerfile.arm64v8 -t manorrock/toyger-admin:arm64v8-latest .
-        docker push manorrock/toyger-admin:arm64v8-latest
-        docker manifest create manorrock/toyger-admin:latest \
-          manorrock/toyger-admin:amd64-latest \
-          manorrock/toyger-admin:arm64v8-latest --amend
-        docker manifest annotate manorrock/toyger-admin:latest \
-          manorrock/toyger-admin:amd64-latest --os linux --arch amd64
-        docker manifest annotate manorrock/toyger-admin:latest \
-          manorrock/toyger-admin:arm64v8-latest --os linux --arch arm64 --variant v8
-        docker manifest push manorrock/toyger-admin:latest
