@@ -26,6 +26,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
     - name: Build Docker images
       run: |
+        cd admin
         docker buildx build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
         docker manifest create manorrock/toyger:latest \
           manorrock/toyger:amd64-latest 
