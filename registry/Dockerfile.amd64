@@ -1,5 +1,5 @@
 FROM debian as builder
-ENV GO_VERSION=1.15.15
+ENV GO_VERSION=1.19.5
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y make git wget && \
@@ -13,8 +13,6 @@ ENV GOARCH=amd64
 RUN mkdir -p /root/go
 WORKDIR /root/go
 RUN go get github.com/docker/distribution/cmd/registry
-RUN cd src/github.com/docker/distribution && git checkout v2.7.1
-RUN go get github.com/docker/distribution/cmd/registry
 RUN mkdir -p /var/lib/registry
 RUN /root/go/bin/registry --version
 
@@ -24,8 +22,8 @@ RUN apt-get update && \
     apt-get install -y ca-certificates librados2 apache2-utils && \
     rm -rf /var/lib/apt/lists/*
 COPY --from=builder /root/go/bin/registry /bin/registry
-COPY config /mnt/registry
+COPY config /mnt
 VOLUME ["/mnt"]
 EXPOSE 5000
 ENTRYPOINT ["/bin/registry"]
-CMD ["serve", "/mnt/registry/config.yml"]
+CMD ["serve", "/mnt/config.yml"]
