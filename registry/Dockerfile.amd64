@@ -11,9 +11,7 @@ RUN rm -rf /var/lib/apt/lists/*
 ENV PATH=$PATH:/usr/local/go/bin
 RUN mkdir -p /root/go
 WORKDIR /root/go
-RUN go get github.com/docker/distribution/cmd/registry
-RUN cd src/github.com/docker/distribution && git checkout v2.7.1
-RUN go get github.com/docker/distribution/cmd/registry
+RUN go get github.com/docker/distribution/cmd/registry@v2.7.1
 RUN mkdir -p /var/lib/registry
 RUN /root/go/bin/registry --version
 
