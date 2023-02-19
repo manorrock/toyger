@@ -1,16 +1,16 @@
 # Manorrock Toyger
 
-This project delivers you with a Docker registry.
+This project delivers you with a Docker registry admin UI.
 
 ## Registry protected by BASIC authentication / authorization
 
 To get started use the following command line:
 
 ```shell
-  docker run --name registry --rm -it -p 5000:5000 manorrock/toyger
+  docker run --name registry --rm -it -p 5000:5000 registry:2
 ```
 
-This will start Manorrock Toyger and expose it on port 5000. Note that by
+This will start the registry and expose it on port 5000. Note that by
 default no user has access to the registry so you will need to add a user so you
 can access the registry.
 
@@ -34,7 +34,7 @@ will need to add the registry URI to your Docker daemon as an insecure registry_
 
 ## Admin to manage authentication / authorization
 
-_This is the admin web application to manage Manorrock Toyger_
+_This is the admin web application to manage Docker registry_
 
 To get started use the following command line replacing $PWD with the directory
 that contains the root directory of the registry container.
