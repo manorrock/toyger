@@ -7,7 +7,7 @@ This project delivers you with a Docker registry admin UI.
 To get started use the following command line:
 
 ```shell
-  docker run --name registry --rm -it -p 5000:5000 registry:2
+  docker run --name registry --rm -d -it -p 5001:5000 registry:2
 ```
 
 This will start the registry and expose it on port 5000. Note that by
