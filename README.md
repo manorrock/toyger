@@ -32,6 +32,9 @@ exposed it on port 5000 the following command line will log you in:
 _Note as this way of running the registry is considered an insecure registry you
 will need to add the registry URI to your Docker daemon as an insecure registry_
 
+See [Test an insecure registry](https://docs.docker.com/registry/insecure/)
+for more information.
+
 ## Admin to manage authentication / authorization
 
 _This is the admin web application to manage Docker registry_
