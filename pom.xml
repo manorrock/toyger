@@ -14,5 +14,6 @@
     <name>Manorrock Toyger - Project</name>
     <modules>
         <module>admin</module>
+        <module>registry</module>
     </modules>
 </project>
