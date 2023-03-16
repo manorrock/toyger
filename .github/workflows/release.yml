@@ -16,22 +16,3 @@ jobs:
         java-version: 17
     - name: Build with Maven
       run: mvn -B -DskipTests=true -f pom.xml --ntp install
-    - name: Login to Docker Hub
-      uses: azure/docker-login@v1
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-    - name: Build and push Docker image
-      run: |
-        cd admin
-        TAG=${GITHUB_REF}
-        INDEX=${TAG%v*}
-        VERSION=${TAG:${#INDEX}+1}
-        export DOCKER_CLI_EXPERIMENTAL=enabled
-        docker build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger-admin:amd64-$VERSION .
-        docker push manorrock/toyger-admin:amd64-$VERSION
-        docker manifest create manorrock/toyger-admin:$VERSION \
-          manorrock/toyger-admin:amd64-$VERSION
-        docker manifest annotate manorrock/toyger-admin:$VERSION \
-          manorrock/toyger-admin:amd64-$VERSION --os linux --arch amd64
-        docker manifest push manorrock/toyger-admin:$VERSION
