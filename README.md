@@ -41,3 +41,10 @@ that contains the root directory of the registry container.
 ```
 
 Then browse to `http://localhost:8080` to manage your Manorrock Toyger registry.
+
+## Where are the Docker images referred to above?
+
+Unfortunately because Docker Inc has decided to no longer support the Free Team
+ plan we can only make the Dockerfiles available on our GitHub repository for 
+you to build the Docker images on your own (see the admin or registry 
+directory).
