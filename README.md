@@ -68,3 +68,9 @@ To build the Docker image for the registry go to the `registry` folder. And then
 ```bash
   docker build -t manorrock/toyger:latest -f Dockerfile .
 ```
+
+## Where are your Docker images?
+
+Unfortunately because Docker Inc has decided to no longer support the Free Team
+ plan we can only make the Dockerfiles available on our GitHub repository for 
+you to build the Docker images on your own.
