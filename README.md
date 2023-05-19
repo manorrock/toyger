@@ -42,13 +42,6 @@ that contains the root directory of the registry container.
 
 Then browse to `http://localhost:8080` to manage your Manorrock Toyger registry.
 
-## Where are the Docker images referred to above?
-
-We are no longer delivering free support for our Docker images. The Dockerfiles
-are in this repository for you to build them manually. If you prefer not to 
-build them yourself please contact us for commercial support at
-info@manorrock.com.
-
 ## Building the Docker images locally
 
 First you will have to build the Java bits. Use the following command line:
