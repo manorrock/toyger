@@ -27,4 +27,5 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build Docker images
       run: |
+        cd admin
         mvn -B --ntp -P docker clean install docker:push
