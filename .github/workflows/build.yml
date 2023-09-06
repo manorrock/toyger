@@ -28,8 +28,4 @@ jobs:
     - name: Build Docker images
       run: |
         cd admin
-        docker buildx build --platform linux/amd64 -f Dockerfile.amd64 -t manorrock/toyger:amd64-latest .
-        docker manifest create manorrock/toyger:latest \
-          manorrock/toyger:amd64-latest 
-        docker manifest annotate manorrock/toyger:latest \
-          manorrock/toyger:amd64-latest --os linux --arch amd64
+        mvn -B --ntp -P docker clean install docker:push
