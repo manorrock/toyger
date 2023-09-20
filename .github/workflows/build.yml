@@ -29,3 +29,5 @@ jobs:
       run: |
         cd admin
         mvn -B --ntp -P docker clean install docker:push
+        cd ../registry
+        mvn -B --ntp -P docker clean install docker:push
