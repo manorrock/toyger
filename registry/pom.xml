@@ -24,7 +24,7 @@
                             <images>
                                 <image>
                                     <alias>toyger-registry</alias>
-                                    <name>manorrock/toyger-registry:%l</name>
+                                    <name>manorrock/toyger:%l</name>
                                     <build>
                                         <buildx>
                                             <platforms>
