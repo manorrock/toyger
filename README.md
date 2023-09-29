@@ -1,5 +1,7 @@
 # Manorrock Toyger
 
+[![build](https://github.com/manorrock/toyger/actions/workflows/build.yml/badge.svg)](https://github.com/manorrock/toyger/actions/workflows/build.yml)
+
 This project delivers you with a Docker registry and an admin UI.
 
 ## Registry protected by BASIC authentication / authorization
