@@ -65,3 +65,7 @@ execute the command line below:
 ```bash
   docker build -t manorrock/toyger:latest -f Dockerfile .
 ```
+
+## How do I contribute?
+
+See [Contributing](CONTRIBUTING.md)
