@@ -17,7 +17,7 @@
         <mojarra.version>3.0.2</mojarra.version>
         <weld.version>4.0.2.Final</weld.version>
         <!-- other -->
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <!-- plugins -->
         <docker-maven-plugin.version>0.43.4</docker-maven-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
