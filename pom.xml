@@ -1,30 +1,48 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="
-        http://maven.apache.org/POM/4.0.0
-        http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.manorrock.toyger</groupId>
-    <artifactId>project</artifactId>
-    <version>21.3.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>Manorrock Toyger - Project</name>
-    <properties>
-        <!-- dependencies -->
-        <mojarra.version>3.0.2</mojarra.version>
-        <weld.version>4.0.2.Final</weld.version>
-        <!-- other -->
-        <java.version>21</java.version>
-        <!-- plugins -->
-        <docker-maven-plugin.version>0.43.4</docker-maven-plugin.version>
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
-    </properties>
-    <modules>
-        <module>admin</module>
-        <module>registry</module>
-    </modules>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://maven.apache.org/POM/4.0.0         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      
+  <modelVersion>4.0.0</modelVersion>
+      
+  <groupId>com.manorrock.toyger</groupId>
+      
+  <artifactId>project</artifactId>
+      
+  <version>21.3.0-SNAPSHOT</version>
+      
+  <packaging>pom</packaging>
+      
+  <name>Manorrock Toyger - Project</name>
+      
+  <properties>
+            
+    <!-- dependencies -->
+            
+    <mojarra.version>3.0.2</mojarra.version>
+            
+    <weld.version>4.0.2.Final</weld.version>
+            
+    <!-- other -->
+            
+    <java.version>21</java.version>
+            
+    <!-- plugins -->
+            
+    <docker-maven-plugin.version>0.43.4</docker-maven-plugin.version>
+            
+    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+            
+    <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
+        
+  </properties>
+      
+  <modules>
+            
+    <module>admin</module>
+            
+    <module>registry</module>
+          
+    <module>webapp</module>
+      
+  </modules>
+  
 </project>
