@@ -22,23 +22,69 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-    
     <build>
+        <finalName>toyger-webapp</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <release>${java.version}</release>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>${docker-maven-plugin.version}</version>
+                        <configuration>
+                            <images>
+                                <image>
+                                    <alias>toyger-webapp</alias>
+                                    <name>ghcr.io/manorrock/toyger-webapp:%l</name>
+                                    <build>
+                                        <buildx>
+                                            <platforms>
+                                                <platform>linux/amd64</platform>
+                                                <platform>linux/arm</platform>
+                                                <platform>linux/arm64</platform>
+                                            </platforms>
+                                        </buildx>
+                                        <contextDir>${basedir}</contextDir>
+                                        <dockerFile>src/main/docker/Dockerfile</dockerFile>
+                                    </build>
+                                </image>
+                            </images>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>build</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>push</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>push</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
