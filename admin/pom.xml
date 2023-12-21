@@ -55,7 +55,7 @@
                             <images>
                                 <image>
                                     <alias>toyger-admin</alias>
-                                    <name>manorrock/toyger-admin:%l</name>
+                                    <name>ghcr.io/manorrock/toyger-admin:%l</name>
                                     <build>
                                         <buildx>
                                             <platforms>
