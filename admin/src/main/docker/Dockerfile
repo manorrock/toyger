@@ -1,5 +1,5 @@
 FROM eclipse-temurin:17
-ENV TOMCAT_VERSION=10.0.14
+ENV TOMCAT_VERSION=10.1.20
 WORKDIR /mnt
 RUN cd /usr/local && \
     curl --insecure -L -O https://archive.apache.org/dist/tomcat/tomcat-10/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
