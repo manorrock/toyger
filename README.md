@@ -44,28 +44,6 @@ that contains the root directory of the registry container.
 
 Then browse to `http://localhost:8080` to manage your Manorrock Toyger registry.
 
-## Building the Docker images locally
-
-First you will have to build the Java bits. Use the following command line:
-
-```bash
-  mvn clean install
-```
-
-To build the Docker image for the admin go to the `admin` directory. And the use
-the command below:
-
-```bash
-  docker build -t manorrock/toyger-admin:latest -f Dockerfile .
-```
-
-To build the Docker image for the registry go to the `registry` folder. And then
-execute the command line below:
-
-```bash
-  docker build -t manorrock/toyger:latest -f Dockerfile .
-```
-
 ## How do I contribute?
 
 See [Contributing](CONTRIBUTING.md)
