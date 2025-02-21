@@ -4,6 +4,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.PathParam;
 
 /**
  * @author MAnfred Riem (mriem@manorrock.com)
@@ -42,6 +43,26 @@ public class V2Resource {
         return Response
                 .ok()
                 .entity("{}")
+                .build();
+    }
+
+    /**
+     * Pulling an image manifest.
+     *
+     * @see https://distribution.github.io/distribution/spec/api/#pulling-an-image-manifest
+     * @param name the name of the repository.
+     * @param reference the reference of the manifest.
+     * @return the response.
+     */
+    @GET
+    @Path("{name}/manifests/{reference}")
+    @Produces("application/vnd.docker.distribution.manifest.v2+json")
+    public Response getManifest(@PathParam("name") String name, @PathParam("reference") String reference) {
+        // Use the name and reference in the method body
+        String manifest = String.format("{\"name\": \"%s\", \"reference\": \"%s\"}", name, reference);
+        return Response
+                .ok()
+                .entity(manifest)
                 .build();
     }
 }
